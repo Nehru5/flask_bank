@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Pentagon Space Bank</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* Typewriter cursor for navbar */
+    .typewriter {
+      border-right: 2px solid #B39137;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .typewriter::after {
+      content: "";
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background-color: #B39137;
+      margin-left: 2px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0; }
+    }
+
+    /* Adjust spacing for stats section below quote */
+    .bottom-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 50px 0;
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.1);
+      padding: 20px 30px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      min-width: 150px;
+      transition: transform 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-card h2 {
+      font-size: 28px;
+      color: #B39137;
+      margin: 0;
+    }
+
+    .stat-card p {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div style="display:flex; align-items:center; gap:14px;">
+    <img src="{{ url_for('static', filename='pybank.jpg') }}" class="bank-logo" alt="Pentagon Space Logo">
+    <h2 id="bank-name" class="typewriter"></h2>
+  </div>
+</div>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Trusted Digital Banking</h1>
+    <p>
+      Secure • Fast • Transparent  
+      <br>
+      Banking built on trust, powered by technology.
+    </p>
+
+    <div class="hero-actions">
+      <a href="/create" class="btn gold">Create Account</a>
+      <a href="/dashboard" class="btn">Login</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="feature-card">
+    🔐
+    <h3>Secure Transactions</h3>
+    <p>Your money is protected with enterprise-grade security.</p>
+  </div>
+
+  <div class="feature-card">
+    ⚡
+    <h3>Instant Banking</h3>
+    <p>Deposit, withdraw & transfer money anytime, anywhere.</p>
+  </div>
+
+  <div class="feature-card">
+    📊
+    <h3>Smart Insights</h3>
+    <p>Track your balance and transactions with live analytics.</p>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+  <blockquote>
+    “A bank is trusted not by its size,  
+    but by the confidence it gives its customers.”
+  </blockquote>
+</section>
+
+<!-- STATS / COUNTERS BELOW QUOTE -->
+<center><section class="stats bottom-stats">
+  <div class="stat-card">
+    <h2 class="counter" data-target="25000">0</h2>
+    <p>Happy Customers</p>
+  </div>
+
+  <div class="stat-card">
+    <h2 class="counter" data-target="1200000">0</h2>
+    <p>Transactions Processed</p>
+  </div>
+
+  <div class="stat-card">
+    <h2 class="counter" data-target="15">0</h2>
+    <p>Years of Trust</p>
+  </div>
+</section></center>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 PyBank</p>
+  <small>Secure Digital Banking Platform</small>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="{{ url_for('static', filename='ripple.js') }}"></script>
+
+<script>
+  // ===============================
+  // Navbar Typewriter Effect
+  // ===============================
+  const text = "PyBank";
+  const target = document.getElementById("bank-name");
+  let index = 0;
+
+  function typeWriter() {
+    if (index < text.length) {
+      target.innerHTML += text.charAt(index);
+      index++;
+      setTimeout(typeWriter, 150); // typing speed
+    }
+  }
+
+  window.addEventListener('load', typeWriter);
+
+  // ===============================
+  // Lazy scroll-triggered counters
+  // ===============================
+  const counters = document.querySelectorAll('.counter');
+
+  const options = { threshold: 0.6 };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counter = entry.target;
+        const target = +counter.getAttribute('data-target');
+        let current = 0;
+        const increment = target / 100;
+
+        const updateCounter = () => {
+          if (current < target) {
+            current += increment;
+            counter.innerText = Math.ceil(current).toLocaleString();
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.innerText = target.toLocaleString();
+          }
+        };
+
+        updateCounter();
+        observer.unobserve(counter);
+      }
+    });
+  }, options);
+
+  counters.forEach(counter => observer.observe(counter));
+</script>
+
+</body>
+</html>

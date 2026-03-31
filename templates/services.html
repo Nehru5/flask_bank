@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Pentagon Space Bank | Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <b>Pentagon Space Bank</b>
+  <span>Acc No: {{ acc }}</span>
+</div>
+
+<!-- MAIN CARD -->
+<div class="card">
+  <h2>Welcome {{ name }}</h2>
+  <h1 class="balance">₹ {{ balance }}</h1>
+
+  <!-- ACTION BUTTONS -->
+  <div class="actions">
+    <a href="/deposit" class="btn">Deposit</a>
+    <a href="/withdraw" class="btn">Withdraw</a>
+    <a href="/transfer" class="btn">Transfer</a>
+    <a href="/history" class="btn">History</a>
+    <a href="/download" class="btn gold">Download</a>
+    <a href="/logout" class="btn danger">Logout</a>
+  </div>
+</div>
+
+<!-- CHART CARD -->
+<div class="card">
+  <h2>Account Balance Overview</h2>
+  <canvas id="balanceChart"></canvas>
+</div>
+
+<!-- SCRIPTS -->
+<script src="{{ url_for('static', filename='ripple.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const chartCanvas = document.getElementById('balanceChart');
+
+  if (chartCanvas) {
+    // Pass Flask transactions to JS
+    const transactions = {{ transactions | tojson }};
+    let balanceFlow = [];
+    let labels = [];
+    let currentBalance = 0;
+
+    transactions.forEach((t, index) => {
+      if (t.type === 'DEPOSIT') currentBalance += t.amount;
+      else if (t.type === 'WITHDRAW' || t.type === 'TRANSFER') currentBalance -= t.amount;
+
+      balanceFlow.push(currentBalance);
+      const date = new Date(t.date);
+      labels.push(date.toLocaleDateString());
+    });
+
+    // Add opening balance at the start
+    balanceFlow.unshift(0);
+    labels.unshift('Opening');
+
+    const ctx = chartCanvas.getContext('2d');
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Balance Flow',
+          data: balanceFlow,
+          borderColor: '#B39137',
+          backgroundColor: 'rgba(179,145,55,0.25)',
+          tension: 0.4,
+          fill: true,
+          pointRadius: 6,
+          pointBackgroundColor: '#00297B'
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 1500, easing: 'easeOutQuart' },
+        plugins: { legend: { labels: { color: '#B39137' } } },
+        scales: { x: { ticks: { color: '#fff' } }, y: { ticks: { color: '#fff' } } }
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

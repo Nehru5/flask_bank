@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Account</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<form class="card" method="POST">
+  <h2>Create Account</h2>
+  <input name="name" placeholder="Name" required>
+  <input name="email" type="email" placeholder="Email" required>
+  <input name="password" type="password" placeholder="Password" required>
+  <input name="balance" type="number" placeholder="Initial Balance" required>
+  <button>Create</button>
+</form>
+
+<script src="{{ url_for('static', filename='ripple.js') }}"></script>
+
+</body>
+</html>

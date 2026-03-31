@@ -1,0 +1,19 @@
+CREATE TABLE accounts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    account_no BIGINT UNIQUE NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    balance DECIMAL(10,2) DEFAULT 0.00
+);
+
+
+CREATE TABLE transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    account_no BIGINT NOT NULL,
+    type VARCHAR(20),
+    amount DECIMAL(10,2),
+    date DATETIME,
+    FOREIGN KEY (account_no) REFERENCES accounts(account_no)
+        ON DELETE CASCADE
+);

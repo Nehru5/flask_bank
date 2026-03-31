@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Transaction History</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="card">
+  <h2>Transactions</h2>
+  <table>
+    {% for r in data %}
+    <tr><td>{{ r[2] }}</td><td>{{ r[3] }}</td><td>{{ r[4] }}</td></tr>
+    {% endfor %}
+  </table>
+  <a href="/services" class="btn back-btn">Back</a>
+</div>
+
+<script src="{{ url_for('static', filename='ripple.js') }}"></script>
+
+</body>
+</html>

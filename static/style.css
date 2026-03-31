@@ -1,0 +1,418 @@
+/* ===============================
+   GLOBAL RESET & BASE
+================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: radial-gradient(circle at top, #003a9f, #001733 70%);
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===============================
+   NAVBAR
+================================ */
+.navbar {
+  background: linear-gradient(90deg, #00297B, #001f5c);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.navbar h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #B39137;
+  letter-spacing: 1px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: 500;
+  position: relative;
+}
+
+.navbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #B39137;
+  transition: 0.3s;
+}
+
+.navbar a:hover::after {
+  width: 100%;
+}
+
+/* ===============================
+   CARD / GLASS UI
+================================ */
+.card {
+  width: 420px;
+  margin: 80px auto;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(14px);
+  padding: 35px;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+  animation: fadeUp 0.7s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card h2 {
+  margin-bottom: 20px;
+  color: #B39137;
+  letter-spacing: 1px;
+}
+
+/* ===============================
+   INPUTS
+================================ */
+input {
+  width: 100%;
+  padding: 14px;
+  margin-top: 14px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.9);
+  font-size: 15px;
+}
+
+input:focus {
+  outline: 2px solid #B39137;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+button,
+.btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 16px;
+  border-radius: 14px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: 0.35s ease;
+}
+
+/* Primary */
+button {
+  background: linear-gradient(135deg, #00297B, #0046c0);
+  color: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+}
+
+/* Back / Secondary */
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+  transform: scale(1.03);
+}
+
+/* Danger */
+.danger {
+  background: linear-gradient(135deg, #ff4d4d, #d10000);
+  color: white;
+}
+
+/* ===============================
+   DASHBOARD BALANCE
+================================ */
+.balance-box {
+  background: linear-gradient(
+    135deg,
+    rgba(179,145,55,0.25),
+    rgba(0,41,123,0.45)
+  );
+  padding: 25px;
+  border-radius: 20px;
+  margin: 25px 0;
+  text-align: center;
+  box-shadow: inset 0 0 20px rgba(255,255,255,0.15);
+}
+
+.balance-box h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #B39137;
+}
+
+.balance-box h1 {
+  margin: 12px 0 0;
+  font-size: 34px;
+  letter-spacing: 1px;
+}
+
+/* ===============================
+   TABLE (STATEMENT)
+================================ */
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  background: rgba(255,255,255,0.1);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+th {
+  background: rgba(0,41,123,0.7);
+  color: #B39137;
+  padding: 12px;
+}
+
+td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+tr:hover {
+  background: rgba(255,255,255,0.08);
+  transition: 0.2s;
+}
+
+/* ===============================
+   LINKS
+================================ */
+a {
+  color: #B39137;
+}
+
+a:hover {
+  color: #ffd777;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media(max-width: 480px) {
+  .card {
+    width: 92%;
+    margin: 60px auto;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+
+/* ===============================
+   RIPPLE BUTTON EFFECT
+================================ */
+button,
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+button span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 600ms linear;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===============================
+   HOME PAGE STYLES
+================================ */
+
+.hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 3.2rem;
+  color: #B39137;
+  margin-bottom: 15px;
+  animation: fadeUp 1s ease;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* FEATURES */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.feature-card {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  font-size: 28px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+  transition: transform 0.35s;
+}
+
+.feature-card h3 {
+  font-size: 18px;
+  margin: 12px 0 6px;
+  color: #B39137;
+}
+
+.feature-card p {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* QUOTE */
+.quote {
+  margin: 80px auto;
+  text-align: center;
+  max-width: 800px;
+  font-size: 1.4rem;
+  font-style: italic;
+  color: #ffd777;
+  padding: 0 20px;
+}
+
+/* FOOTER */
+.footer {
+  background: linear-gradient(135deg, #001733, #00297B);
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
+}
+
+.footer p {
+  margin: 0;
+  color: #B39137;
+  font-weight: bold;
+}
+
+.footer small {
+  opacity: 0.7;
+}
+
+/* ===============================
+   LOGO IMAGE
+================================ */
+.bank-logo {
+  height: 45px;
+  width: auto;
+  filter: drop-shadow(0 0 6px rgba(179,145,55,0.6));
+  transition: 0.3s;
+}
+
+.bank-logo:hover {
+  transform: scale(1.05);
+}
+
+/* ===============================
+   STATS / COUNTERS
+================================ */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 80px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.stat-card h2 {
+  font-size: 3rem;
+  color: #B39137;
+  margin: 0;
+}
+
+.stat-card p {
+  margin-top: 10px;
+  opacity: 0.85;
+  letter-spacing: 0.5px;
+}
+

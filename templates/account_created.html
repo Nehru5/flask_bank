@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Account Created</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="card">
+  <h2>Account Created</h2>
+  <h1>{{ account_no }}</h1>
+  <a href="/dashboard"><button>Login</button></a>
+</div>
+<script src="{{ url_for('static', filename='ripple.js') }}"></script>
+
+</body>
+</html>

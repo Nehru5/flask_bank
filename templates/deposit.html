@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deposit</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<form class="card" method="POST">
+  <h2>Deposit Amount</h2>
+  <input name="amount" placeholder="Amount" required>
+  <button type="submit">Submit</button>
+
+  <!-- BACK BUTTON -->
+  <a href="/services" class="btn back-btn">Back</a>
+</form>
+<script src="{{ url_for('static', filename='ripple.js') }}"></script>
+
+</body>
+</html>

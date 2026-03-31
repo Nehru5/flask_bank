@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Transfer Money</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="card">
+  <h2>Transfer Money</h2>
+  <form method="POST">
+    <label for="to_acc">Select Account to Transfer:</label>
+    <select name="to_acc" id="to_acc" required>
+      <option value="">--Choose Account--</option>
+      {% for acc in accounts %}
+        <option value="{{ acc.account_no }}">
+          {{ acc.name }} ({{ acc.account_no }})
+        </option>
+      {% endfor %}
+    </select>
+
+    <input type="number" name="amount" placeholder="Enter Amount" step="0.01" min="1" required>
+
+    <button type="submit" class="btn">Transfer</button>
+  </form>
+  <a href="{{ url_for('services') }}" class="btn back-btn">Back</a>
+</div>
+
+<script src="{{ url_for('static', filename='ripple.js') }}"></script>
+</body>
+</html>

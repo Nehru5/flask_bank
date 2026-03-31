@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+ <form class="card" method="POST">
+  <h2>Login</h2>
+  {% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+  <input name="account_no" placeholder="Account Number" required>
+  <input name="password" type="password" placeholder="Password" required>
+  <button>Login</button>
+</form>
+
+<script src="{{ url_for('static', filename='ripple.js') }}"></script>
+
+</body>
+</html>
